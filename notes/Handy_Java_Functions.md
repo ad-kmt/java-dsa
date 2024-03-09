@@ -4,10 +4,10 @@
 **Scanner for taking input**:
 ```java
   Scanner scanner = new Scanner(System.in);
-        int intValue = scanner.nextInt();
-        double doubleValue = scanner.nextDouble();
-        String stringValue = scanner.nextLine();
-        scanner.close();
+  int intValue = scanner.nextInt();
+  double doubleValue = scanner.nextDouble();
+  String stringValue = scanner.nextLine();
+  scanner.close();
 ```
 
 ## Collections Framework Utilities
