@@ -44,7 +44,7 @@
 
 - **Sorting an array**:  `Arrays.sort(arr);`
 
-- **Converting a list to an array**: `list.toArray(new Type[list.size()]);`
+- **Converting a list to an array**: `list.toArray(new <Type>[0]);`
 
 - **Converting an array to a list**: `Arrays.asList(arr);`
 
