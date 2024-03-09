@@ -24,8 +24,8 @@ public class BFS {
 
             //Visiting a node from top of queue
             Integer node = q.poll();
-            bfsList.add(node);
 
+            bfsList.add(node);
             //Checking Adjacent Nodes
             ArrayList<Integer> adjNodes = adj.get(node);
             for(int adjNode : adjNodes){
