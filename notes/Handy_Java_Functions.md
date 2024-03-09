@@ -40,6 +40,8 @@
 
 ## Array Utilities
 
+- **Converting an array to string**: `Arrays.toString(arr)`  
+
 - **Sorting an array**:  `Arrays.sort(arr);`
 
 - **Converting a list to an array**: `list.toArray(new Type[list.size()]);`
