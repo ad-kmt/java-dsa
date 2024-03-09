@@ -96,9 +96,9 @@
 
 - **Generating random integers in a range**: `int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);`
 
-- **Calculating the logarithm**: `Math.log(number); (natural logarithm), Math.log10(number); (base 10)`
+- **Calculating the logarithm**: `Math.log(number);` (natural logarithm), `Math.log10(number);` (base 10)
 
-- **Trigonometric functions**: `Math.sin(angle);, Math.cos(angle);, Math.tan(angle);`
+- **Trigonometric functions**: `Math.sin(angle); Math.cos(angle); Math.tan(angle);`
 
 - **Raising e to the power of a number**: `Math.exp(number);`
 
