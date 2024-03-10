@@ -125,3 +125,5 @@
 - **Checking if a string is a number**: `str.matches("-?\\d+(\\.\\d+)?");`
 
 - **Converting between data types**: `Integer.parseInt(str);`, `String.valueOf(number);`
+
+- **Converting List<Integer> to int[]**: `list.stream().mapToInt(Integer::intValue).toArray();`
