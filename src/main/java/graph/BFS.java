@@ -6,44 +6,71 @@ import java.util.Queue;
 
 public class BFS {
 
-    public static ArrayList<Integer> bfs(int startNode, ArrayList < ArrayList < Integer >> adj, boolean[] vis){
+    /**
+     * Performs Breadth First Search (BFS) on a graph starting from the given node.
+     *
+     * Intuition:
+     * BFS explores all nodes at the present depth level before moving on to nodes at the next depth level.
+     *
+     * Data Structures Used:
+     * - Queue to keep track of nodes to visit next
+     * - Visited array to keep track of visited nodes
+     *
+     * Algorithm Description:
+     * 1. Initialize the queue and mark the starting node as visited.
+     * 2. While the queue is not empty, repeat steps 3-5.
+     * 3. Remove the front node from the queue and add it to the BFS list.
+     * 4. For each adjacent node of the current node, if it has not been visited, add it to the queue and mark it as visited.
+     * 5. Return the BFS traversal list.
+     *
+     * Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges.
+     * Space Complexity: O(V), for the queue and visited array.
+     * Edge Cases:
+     * - The graph may be disconnected, in which case the BFS should handle all components.
+     *
+     * Limitations:
+     * - The graph is assumed to be undirected. For directed graphs, minor modifications are needed.
+     *
+     * @param startNode the starting node for BFS traversal
+     * @param adj the adjacency list representing the graph
+     * @param vis the visited array
+     * @return the list of nodes in BFS order
+     */
+    public static ArrayList<Integer> bfs(int startNode, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {
+        ArrayList<Integer> bfsList = new ArrayList<>(); // Output list to store BFS traversal order
 
-        //Output
-        ArrayList<Integer> bfsList = new ArrayList<>();
+        Queue<Integer> queue = new LinkedList<>(); // Queue for BFS
 
-        //Data structures we need:
-        // 1. Queue
-        // 2. Visited array
-        Queue<Integer> q = new LinkedList<>();
+        // Start BFS traversal from the given node
+        queue.add(startNode);
+        vis[startNode] = true; // Mark the start node as visited
 
-        //Starting BFS traversal with given node
-        q.add(startNode);
-        vis[startNode] = true;
+        // Continue the traversal until the queue is empty
+        while (!queue.isEmpty()) {
+            int currentNode = queue.poll(); // Dequeue the front node
+            bfsList.add(currentNode); // Add the current node to the BFS list
 
-        while(!q.isEmpty()){
-
-            //Visiting a node from top of queue
-            Integer node = q.poll();
-
-            bfsList.add(node);
-            //Checking Adjacent Nodes
-            ArrayList<Integer> adjNodes = adj.get(node);
-            for(int adjNode : adjNodes){
-                if(!vis[adjNode]){
-                    q.add(adjNode); // add in queue
-                    vis[adjNode] = true;// mark visited
+            // Iterate through all adjacent nodes
+            for (int adjNode : adj.get(currentNode)) {
+                if (!vis[adjNode]) { // If the adjacent node is not visited
+                    queue.add(adjNode); // Enqueue the adjacent node
+                    vis[adjNode] = true; // Mark the adjacent node as visited
                 }
             }
         }
-        return bfsList;
+        return bfsList; // Return the BFS traversal list
     }
 
     public static void main(String[] args) {
-        ArrayList < ArrayList < Integer >> adj = new ArrayList < > ();
         int totalNodes = 5;
+
+        // Initializing the adjacency list for the graph
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>(totalNodes);
         for (int i = 0; i < totalNodes; i++) {
-            adj.add(new ArrayList < > ());
+            adj.add(new ArrayList<>());
         }
+
+        // Adding edges to the graph
         adj.get(0).add(1);
         adj.get(1).add(0);
         adj.get(0).add(2);
@@ -53,26 +80,30 @@ public class BFS {
         adj.get(2).add(4);
         adj.get(4).add(2);
 
-        boolean[] vis = new boolean[totalNodes];
+        boolean[] visited = new boolean[totalNodes]; // Visited array to track visited nodes
 
-        // A graph can have multiple components
-        // do traversal on all components of Graph.
+        // Perform BFS for all components of the graph
         int totalComponents = 0;
         for (int i = 0; i < totalNodes; i++) {
-            if(!vis[i]) {
-                ArrayList<Integer> bfsGraphComponent = bfs(i, adj, vis);
-                printAns(bfsGraphComponent);
-                totalComponents++;
+            if (!visited[i]) { // If the node is not visited
+                ArrayList<Integer> bfsComponent = bfs(i, adj, visited); // Perform BFS for the component
+                printBFSResult(bfsComponent); // Print the BFS result for the component
+                totalComponents++; // Increment the count of components
             }
         }
 
-        System.out.println("Total components in graph: " + totalComponents);
+        System.out.println("Total components in graph: " + totalComponents); // Print the total number of components
     }
 
-    static void printAns(ArrayList < Integer > ans) {
-        for (int i = 0; i < ans.size(); i++) {
-            System.out.print(ans.get(i) + " ");
+    /**
+     * Prints the result of the BFS traversal.
+     *
+     * @param result the list of nodes in BFS order
+     */
+    static void printBFSResult(ArrayList<Integer> result) {
+        for (int node : result) {
+            System.out.print(node + " "); // Print each node in the BFS result
         }
-        System.out.println(" ");
+        System.out.println(); // Print a newline after printing all nodes
     }
 }

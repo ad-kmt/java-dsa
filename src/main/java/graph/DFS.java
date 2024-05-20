@@ -4,55 +4,70 @@ import java.util.ArrayList;
 
 public class DFS {
 
-    public static void dfs(int node, ArrayList < ArrayList < Integer >> adj, boolean[] vis){
-
+    /**
+     * Performs depth-first search (DFS) on a graph starting from a specific node.
+     *
+     * Intuition: DFS explores as far as possible along each branch before backtracking, ensuring deep traversal before level traversal.
+     *
+     * Data Structures Used: Recursive call stack for managing nodes to explore, boolean array for visited nodes.
+     *
+     * Algorithm Description:
+     *   1. Mark the current node as visited.
+     *   2. Print the current node (or perform other processing).
+     *   3. Recursively visit all unvisited neighbors of the current node.
+     *
+     * Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges.
+     * Space Complexity: O(V), primarily for the visited array and the recursive call stack.
+     *
+     * Edge Cases: Handles graphs with multiple disconnected components via external loop in main.
+     *
+     * @param node the starting node for DFS
+     * @param adjacencyList the adjacency list representing the graph
+     * @param visited the array to track visited nodes
+     */
+    public static void dfs(int node, ArrayList<ArrayList<Integer>> adjacencyList, boolean[] visited) {
+        // Mark the current node as visited and print it.
+        visited[node] = true;
         System.out.print(node + " ");
-        vis[node] = true;
 
-        //Checking Adjacent Nodes
-        ArrayList<Integer> adjNodes = adj.get(node);
-        for(int adjNode : adjNodes){
-            if(!vis[adjNode]){
-                dfs(adjNode, adj, vis);
+        // Explore each adjacent node of the current node.
+        for (int neighbor : adjacencyList.get(node)) {
+            // If the neighbor has not been visited, recursively visit it.
+            if (!visited[neighbor]) {
+                dfs(neighbor, adjacencyList, visited);
             }
         }
     }
 
     public static void main(String[] args) {
-        ArrayList <ArrayList< Integer >> adj = new ArrayList < > ();
         int totalNodes = 10;
+        ArrayList<ArrayList<Integer>> adjacencyList = new ArrayList<>();
         for (int i = 0; i < totalNodes; i++) {
-            adj.add(new ArrayList < > ());
+            adjacencyList.add(new ArrayList<>());
         }
-        adj.get(0).add(1);
-        adj.get(1).add(0);
-        adj.get(0).add(2);
-        adj.get(2).add(0);
-        adj.get(0).add(3);
-        adj.get(3).add(0);
-        adj.get(2).add(4);
-        adj.get(4).add(2);
 
-        boolean[] vis = new boolean[totalNodes];
+        // Constructing a simple graph
+        adjacencyList.get(0).add(1);
+        adjacencyList.get(1).add(0);
+        adjacencyList.get(0).add(2);
+        adjacencyList.get(2).add(0);
+        adjacencyList.get(0).add(3);
+        adjacencyList.get(3).add(0);
+        adjacencyList.get(2).add(4);
+        adjacencyList.get(4).add(2);
 
-        // A graph can have multiple components
-        // do traversal on all components of Graph.
+        boolean[] visited = new boolean[totalNodes];
         int totalComponents = 0;
+
+        // Perform DFS for each component of the graph.
         for (int i = 0; i < totalNodes; i++) {
-            if(!vis[i]) {
-                dfs(i, adj, vis);
+            if (!visited[i]) {
+                dfs(i, adjacencyList, visited);
                 totalComponents++;
-                System.out.println(" ");
+                System.out.println();
             }
         }
 
         System.out.println("Total components in graph: " + totalComponents);
-    }
-
-    static void printAns(ArrayList < Integer > ans) {
-        for (int i = 0; i < ans.size(); i++) {
-            System.out.print(ans.get(i) + " ");
-        }
-        System.out.println(" ");
     }
 }
