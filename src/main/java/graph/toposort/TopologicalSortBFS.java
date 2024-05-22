@@ -15,7 +15,7 @@ public class TopologicalSortBFS {
      * - Queue to manage nodes with zero in-degree
      * - In-degree array to track the number of incoming edges for each node
      *
-     * Algorithm Description:
+     * Algorithm Steps:
      * 1. Calculate the in-degree of each node.
      * 2. Initialize a queue with all nodes having zero in-degree.
      * 3. While the queue is not empty, remove a node, add it to the topological sort list, and decrease the in-degree of its adjacent nodes.

@@ -39,18 +39,19 @@ public class Bridges {
      * A bridge (or cut-edge) in a graph is an edge that, when removed, makes the graph disconnected or increases the number of separate connected components.
      * This method uses a DFS-based algorithm to find all such bridges.
      *
-     * Data Structures Used:
-     * - visited[]: Boolean array to keep track of visited nodes.
-     * - time[]: Array to store the discovery time of each node.
-     * - lowestReachable[]: Array to store the lowest discovery time reachable from the subtree rooted with the node.
-     *
      * Intuition:
      * The algorithm uses Depth-First Search (DFS) to find bridges by maintaining discovery times and the earliest reachable vertex
      * (lowestReachable value) for each vertex. During the DFS, for each edge (u, v):
      * - If v is not visited, it is visited recursively, and the low value of u is updated based on the lowestReachable value of v.
      * - If v is already visited and v is not the parent of u, the low value of u is updated based on the lowestReachable time of v.
      *
-     * An edge (u, v) is identified as a bridge if the low value of v is greater than the discovery time of u,
+     *
+     * Data Structures Used:
+     * - visited[]: Boolean array to keep track of visited nodes.
+     * - discoveryTime[]: Array to store the discovery time of each node.
+     * - lowestReachable[]: Array to store the lowest discovery time reachable from the subtree rooted with the node.
+     *
+     * An edge (u, v) is identified as a bridge if the lowestReachable value of v is GREATER THAN (>) the discovery time of u,
      * indicating that there is no back edge from the subtree rooted at v to one of the ancestors of u.
      *
      * Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges.
