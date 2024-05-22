@@ -58,7 +58,7 @@ public class TopologicalSortDFS {
      * 5. Pop all nodes from the stack to get the topological sort order.
      *
      * Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges.
-     * Space Complexity: O(V), for the stack and visited array.
+     * Space Complexity: O(V), for the stack, visited and recursionStack array.
      * Edge Cases:
      * - The graph may be disconnected.
      * - The graph may contain self-loops.
